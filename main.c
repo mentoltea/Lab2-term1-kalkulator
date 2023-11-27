@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-#include <assert.h>
 #include "read_args.h"
 #include "system16.h"
 #include "system8.h"
@@ -185,9 +183,7 @@ int main() {
     char* arg2 = argv[2];
     char operation = *argv[1];
     printf("\n");
-    for (int i=0; i<3; i++) {
-        printf("%d: %s\n", i, argv[i]);
-    }
+    printf("arg1: %s\noperand: %c\narg2: %s\n", arg1, operation, arg2);
     printf("\n");
 
     char* result = solve(arg1, arg2, operation);

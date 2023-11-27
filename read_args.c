@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <assert.h>
 #include "read_args.h"
 
 char* substr(char* str, size_t from, size_t to) {
@@ -50,7 +45,7 @@ char** filter_args(char* input, size_t len, char* operations, size_t operations_
         arg1[sep-input+1]='\0';
 
         arg2 = memcpy(arg2, sep+1, ((input-sep)+len-1)*sizeof(char));
-        if (strlen(arg2)==1) {
+        if (strlen(arg2)==0) {
             printf("Arg2 is empty!\n");
             exit(1);
         }
