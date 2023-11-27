@@ -44,12 +44,12 @@ char** filter_args(char* input, size_t len, char* operations, size_t operations_
     }
     else {
         char *arg1 = (char*) malloc((sep-input+1)*sizeof(char));
-        char *arg2 = (char*) malloc(((input-sep)+len+1)*sizeof(char));
+        char *arg2 = (char*) malloc(((input-sep)+len)*sizeof(char));
 
         arg1 = memcpy(arg1, input, (sep-input)*sizeof(char));
         arg1[sep-input+1]='\0';
 
-        arg2 = memcpy(arg2, sep+1, ((input-sep)+len+1)*sizeof(char));
+        arg2 = memcpy(arg2, sep+1, ((input-sep)+len-1)*sizeof(char));
         if (strlen(arg2)==1) {
             printf("Arg2 is empty!\n");
             exit(1);

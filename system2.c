@@ -1,6 +1,7 @@
 #include "system2.h"
 
 int from2to10(char* arg) {
+    printf("%s ->", arg);
     while (*arg==' ') {
         arg += 1;
     }
@@ -14,7 +15,7 @@ int from2to10(char* arg) {
     int power = 0;
     char* alphabet = "01";
     for (int i=0; i<strlen(arg); i++) {
-        if (arg[i] == ' ' || arg[i] == '\0') {continue;}
+        if (arg[i] == ' ' || arg[i] == '\0' || arg[i] == '\n') {continue;}
         int flag = 1;
         for (int j=0; j<2; j++) {
             if (arg[i] == alphabet[j]) {
@@ -23,17 +24,18 @@ int from2to10(char* arg) {
             }
         }
         if (flag) {
-            printf("The letter %c is out of hex system!\n");
+            printf("The letter %c is out of bin system!\n");
             exit(1);
         }
     }
     while (ptr != arg-1) {
-        if (*ptr != ' ' && *ptr != '\0') {
+        if (*ptr != ' ' && *ptr != '\0' && *ptr != '\n') {
             sum += pow(2, power) * (strchr(alphabet, *ptr) - alphabet);
             power += 1;
-            ptr -= 1;
         }
+        ptr -= 1;
     }
+    printf(" %d\n", sum*koef);
     return sum*koef;
 }
 
