@@ -1,0 +1,4 @@
+#!/bin/bash
+
+clear
+gcc -w main.c read_args.c -o .out && ./.out && rm .out
