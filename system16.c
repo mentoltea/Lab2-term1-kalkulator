@@ -48,7 +48,7 @@ char* from10to16(int decimal) {
     while (decimal / pow(16, n) > 0) {
         n+=1;
     }
-    char result[n+1+koef];
+    char *result = (char*)malloc((n+2+koef)*sizeof(char));
     result[n+2+koef]='\0';
     int last = 0;
     if (koef) {
@@ -65,7 +65,5 @@ char* from10to16(int decimal) {
         decimal /= 16;
         end -= 1;       
     }
-    printf("debug %s\n", result);
-    exit(1);
     return result;
 }

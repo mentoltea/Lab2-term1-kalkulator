@@ -12,7 +12,8 @@
 
 
 int main() {
-    printf("%s\n", from10to16(-252345));
+    char* s = from10to16(-255);
+    printf("%s\n", s);
     return;
     char* input = NULL;
     size_t len = 0;
