@@ -55,7 +55,7 @@ char* from10to8(int decimal) {
         last += 1;
     }
     
-    result[last]='0'; result[last+1]='x';
+    result[last]='0';
     last+=2;
 
     int end = n+koef;

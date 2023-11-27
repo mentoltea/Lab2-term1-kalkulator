@@ -12,7 +12,7 @@
 
 
 int main() {
-    char* s = from10to16(-255);
+    char* s = from10to2(-31);
     printf("%s\n", s);
     return;
     char* input = NULL;
