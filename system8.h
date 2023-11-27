@@ -6,7 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
-
+#include "decimal_funcs.h"
 
 int from8to10(char* arg);
 

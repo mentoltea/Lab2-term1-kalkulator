@@ -19,6 +19,7 @@ char** filter_args(char* input, size_t len, char* operations, size_t operations_
     for (int i = 0; i<operations_len; i++) {
         sep = strchr(input, operations[i]);
         if (sep != NULL) {
+            if (*sep == '-' && sep==input){ continue; }
             break;
         }
     }

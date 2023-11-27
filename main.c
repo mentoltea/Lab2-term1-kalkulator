@@ -12,7 +12,7 @@
 
 
 int main() {
-    printf("%d", ~3);
+    printf("%s\n", from10to16(-252345));
     return;
     char* input = NULL;
     size_t len = 0;

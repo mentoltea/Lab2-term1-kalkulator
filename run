@@ -1,4 +1,4 @@
 #!/bin/bash
 
 clear
-gcc -w main.c read_args.c -o .out && ./.out && rm .out
+gcc -w main.c read_args.c system16.c system8.c system2.c decimal_funcs.c -o .out && ./.out && rm .out
