@@ -5,6 +5,13 @@
 #include <assert.h>
 #include "read_args.h"
 
+char* substr(char* str, size_t from, size_t to) {
+    char* res = (char*)malloc(sizeof(char)*(to-from));
+    for (int i=from; i<to; i++) {
+        res[i-from] = str[i];
+    }
+    return res;
+}
 
 
 char** filter_args(char* input, size_t len, char* operations, size_t operations_len) {
@@ -19,14 +26,19 @@ char** filter_args(char* input, size_t len, char* operations, size_t operations_
         printf("Supportable operation was not found\n");
         exit(1);
     }
-    printf("operation: %c\n", *sep);
+    //printf("operation: %c\n", *sep);
     char** result = (char**)malloc(3*sizeof(char*));
 
     if (sep==input) {
-        char* arg1 = substr(input, 1, strlen(input));
+        char* arg1;
+        arg1 = substr(input, 1, strlen(input)-1);
         result[0] = arg1;
-        result[1] = sep;
-        result[2] = arg1;
+
+        char* operation[1];
+        operation[0]=*sep;
+        result[1] = operation;
+
+        result[2] = NULL;
         return result;
     }
     else {
@@ -41,7 +53,7 @@ char** filter_args(char* input, size_t len, char* operations, size_t operations_
             printf("Arg2 is empty!\n");
             exit(1);
         }
-        printf("arg1: %s\narg2: %s\n", arg1, arg2);
+        //printf("arg1: %s\narg2: %s\n", arg1, arg2);
 
         char* operation[1];
         operation[0]=*sep;

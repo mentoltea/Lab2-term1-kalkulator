@@ -9,5 +9,6 @@
 
 char** filter_args(char* input, size_t len, char* operations, size_t operations_len);
 
+char* substr(char* str, size_t from, size_t to);
 
 #endif
