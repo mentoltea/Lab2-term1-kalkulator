@@ -4,13 +4,16 @@
 #include <ctype.h>
 #include <assert.h>
 #include "read_args.h"
-//#include "system16.h"
-//#include "system8.h"
-//#include "system2.h"
+#include "system16.h"
+#include "system8.h"
+#include "system2.h"
+#include "decimal_funcs.h"
 
 
 
 int main() {
+    printf("%d", ~3);
+    return;
     char* input = NULL;
     size_t len = 0;
     char* operations = "+-*%%&|^~";

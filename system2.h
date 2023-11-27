@@ -7,22 +7,9 @@
 #include <ctype.h>
 #include <assert.h>
 
-char* system2(char* arg1, char* arg2, char operation);
+int from2to10(char* arg);
 
-char* sum2(char* arg1, char* arg2);
+char* from10to2(int decimal);
 
-char* sub2(char* arg1, char* arg2);
-
-char* mul2(char* arg1, char* arg2);
-
-char* moddiv2(char* arg1, char* arg2);
-
-char* bitand2(char* arg1, char* arg2);
-
-char* bitor2(char* arg1, char* arg2);
-
-char* bitxor2(char* arg1, char* arg2);
-
-char* bitnot2(char* arg);
 
 #endif
