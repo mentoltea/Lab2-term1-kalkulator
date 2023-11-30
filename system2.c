@@ -76,3 +76,25 @@ char* from10to2(int decimal) {
 
     return result;
 }
+
+
+int bit_inverse(int decimal) {
+    char* arg = from10to2(decimal);
+    int arg_len = strlen(arg);
+    printf("\n%s\n(inversion)->\n",arg);
+
+    for (int i=0; i<arg_len; i++) {
+        if (arg[i] == '0') {
+            arg[i] = '1';
+        } else {
+            arg[i] = '0';
+        }
+    }
+
+    while(*arg=='0' && arg_len>1) {
+        arg+=1;
+        arg_len-=1;
+    }
+    printf("%s\n\n",arg);
+    return from2to10(arg);
+}

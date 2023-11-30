@@ -8,6 +8,8 @@
 
 int from2to10(char* arg);
 
+int bit_inverse(int decimal);
+
 char* from10to2(int decimal);
 
 

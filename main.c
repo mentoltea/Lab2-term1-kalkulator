@@ -55,14 +55,19 @@ char* solve(char* arg1, char* arg2, char operation) {
     if (*arg1=='-') {
         temp += 1;
     }
-    arg1_type = arg1[temp];
-    if (arg1_type!='x') {
-        temp -=1;
+    if (strlen(arg1+temp-1) == 1) {
+        arg1_type = 'b';
+    } else {
         arg1_type = arg1[temp];
-        if (arg1_type!='0') {
-            arg1_type='b';
+        if (arg1_type!='x') {
+            temp -=1;
+            arg1_type = arg1[temp];
+            if (arg1_type!='0') {
+                arg1_type='b';
+            }
         }
     }
+
 
     if (arg2 != NULL) {
         while (*arg2==' ') {
@@ -72,12 +77,16 @@ char* solve(char* arg1, char* arg2, char operation) {
         if (*arg2=='-') {
             temp += 1;
         }
-        arg2_type = arg2[temp];
-        if (arg2_type!='x') {
-            temp -=1;
+        if (strlen(arg2+temp-1) == 1) {
+            arg2_type = 'b';
+        } else {
             arg2_type = arg2[temp];
-            if (arg2_type!='0') {
-                arg2_type='b';
+            if (arg2_type!='x') {
+                temp -=1;
+                arg2_type = arg2[temp];
+                if (arg2_type!='0') {
+                    arg2_type='b';
+                }
             }
         }
 
