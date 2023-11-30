@@ -1,6 +1,9 @@
 #include "system8.h"
 
 int from8to10(char* arg) {
+    if (arg == NULL) {
+        return NULL;
+    }
     printf("%s ->", arg);
     while (*arg==' ') {
         arg += 1;
@@ -41,6 +44,11 @@ int from8to10(char* arg) {
 }
 
 char* from10to8(int decimal) {
+    if (decimal==0) {
+        char *result = (char*)malloc(2*sizeof(char));
+        result[0]='0';result[1]='0';
+        return result;
+    }
     int koef = 0;
     if (decimal<0) {koef=1; decimal*=-1;}
     char* alphabet = "01234567";

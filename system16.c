@@ -2,6 +2,9 @@
 
 
 int from16to10(char* arg) {
+    if (arg == NULL) {
+        return NULL;
+    }
     printf("%s ->", arg);
     while (*arg==' ') {
         arg += 1;
@@ -42,6 +45,11 @@ int from16to10(char* arg) {
 }
 
 char* from10to16(int decimal) {
+    if (decimal==0) {
+        char *result = (char*)malloc(3*sizeof(char));
+        result[0]='0';result[1]='x';result[2]='0';
+        return result;
+    }
     int koef = 0;
     if (decimal<0) {koef=1; decimal*=-1;}
     char* alphabet = "0123456789abcdef";

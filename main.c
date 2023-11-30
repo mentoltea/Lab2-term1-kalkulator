@@ -10,6 +10,11 @@
 
 
 char* itoa(int decimal) {
+    if (decimal==0) {
+        char *result = (char*)malloc(1*sizeof(char));
+        result[0] = '0';
+        return result;
+    }
     int koef = 0;
     if (decimal<0) {koef=1; decimal*=-1;}
     char* alphabet = "0123456789";
@@ -35,70 +40,14 @@ char* itoa(int decimal) {
     return result;
 }
 
-char* unar(char* arg, char operation) {
-    if (operation != '~') {
+
+char* solve(char* arg1, char* arg2, char operation) {
+    if (arg2 == NULL && operation != '~') {
         printf("%c is not a unar operation!\n", operation);
         exit(1);
     }
-    while (*arg==' ') {
-        arg += 1;
-    }
-    char* result;
-    char arg_type;
-    int temp = 1;
-    if (*arg=='-') {
-        temp += 1;
-    }
-    arg_type = arg[temp];
-    if (arg_type!='x') {
-        temp -=1;
-        arg_type = arg[temp];
-        if (arg_type!='0') {
-            arg_type='b';
-        }
-    }
-    
-    int dec;
-    if (arg_type=='x'){
-        dec = from16to10(arg);
-    } else if (arg_type=='0') {
-        dec = from8to10(arg);
-    } else {
-        dec = from2to10(arg);
-    }
-
-    int solution = eval(dec, NULL, operation);
-
-    if (arg_type=='x'){
-        result = from10to16(solution);
-    } else if (arg_type=='0') {
-        result = from10to8(solution);
-    } else {
-        result = from10to2(solution);
-    }
-
-    char* solstr = itoa(solution);
-    char* res = (char*)malloc(sizeof(char)*(strlen(result)+strlen(solstr)+2+2));
-    memcpy(res, result, strlen(result));
-    res[strlen(result)] = ' ';
-    res[strlen(result)+1] = '(';
-    memcpy(res+strlen(result)+2, solstr, strlen(solstr));
-    res[strlen(result)+2+strlen(solstr)] = ')';
-    res[strlen(result)+2+strlen(solstr)+1] = '\0';
-
-    return res;
-
-}
-
-char* solve(char* arg1, char* arg2, char operation) {
-    if (arg2 == NULL) {
-        return unar(arg1, operation);
-    }
     while (*arg1==' ') {
         arg1 += 1;
-    }
-    while (*arg2==' ') {
-        arg2 += 1;
     }
     char* result;
     char arg1_type, arg2_type;
@@ -115,25 +64,33 @@ char* solve(char* arg1, char* arg2, char operation) {
         }
     }
 
-    temp = 1;
-    if (*arg2=='-') {
-        temp += 1;
-    }
-    arg2_type = arg2[temp];
-    if (arg2_type!='x') {
-        temp -=1;
-        arg2_type = arg1[temp];
-        if (arg2_type!='0') {
-            arg2_type='b';
+    if (arg2 != NULL) {
+        while (*arg2==' ') {
+            arg2 += 1;
+        }
+        temp = 1;
+        if (*arg2=='-') {
+            temp += 1;
+        }
+        arg2_type = arg2[temp];
+        if (arg2_type!='x') {
+            temp -=1;
+            arg2_type = arg2[temp];
+            if (arg2_type!='0') {
+                arg2_type='b';
+            }
+        }
+
+        if (arg1_type!=arg2_type) {
+            printf("Cannot do math with different bases!(%c and %c)\n",arg1_type, arg2_type);
+            exit(1);
         }
     }
 
-    if (arg1_type!=arg2_type) {
-        printf("Cannot do math with different bases!(%c and %c)\n",arg1_type, arg2_type);
-        exit(1);
-    }
-
     int dec1, dec2;
+    if (arg2 == NULL) {
+            dec2 = NULL;
+    }
     if (arg1_type=='x'){
         dec1 = from16to10(arg1);
         dec2 = from16to10(arg2);
@@ -144,9 +101,22 @@ char* solve(char* arg1, char* arg2, char operation) {
         dec1 = from2to10(arg1);
         dec2 = from2to10(arg2);
     }
+    
 
     int solution = eval(dec1, dec2, operation);
+    if (solution==NULL) {
+        printf("Not allowed to do binary operations to negative numbers!\n");
+        exit(1);
+    }
     
+    if (operation == '&' || operation == '|' || operation == '^' || operation == '~') {
+        printf("\narg1 bin -> %s\n", from10to2(dec1));
+        if (dec2 != NULL) {
+            printf("arg2 bin -> %s\n", from10to2(dec2));
+        }
+        printf("solution -> %s\n", from10to2(solution));
+    }
+
     if (arg1_type=='x'){
         result = from10to16(solution);
     } else if (arg1_type=='0') {
@@ -170,9 +140,13 @@ char* solve(char* arg1, char* arg2, char operation) {
 
 
 int main() {
+    //int d1 = 432;
+    //int d2 = 345;
+    //printf("%s\n%s\n%s\n", from10to2(d1), from10to2(d2), from10to2(d1 | d2));
+    //return;
     char* input = NULL;
     size_t len = 0;
-    char* operations = "+-*%%&|^~";
+    char* operations = "+*%%&|^~-";
     size_t operations_len = sizeof(operations)/sizeof(char)+1;
 
     printf("Enter expression:\n");

@@ -22,7 +22,7 @@ char** filter_args(char* input, size_t len, char* operations, size_t operations_
         printf("Supportable operation was not found\n");
         exit(1);
     }
-    //printf("operation: %c\n", *sep);
+    printf("operation: %c\n", *sep);
     char** result = (char**)malloc(3*sizeof(char*));
 
     if (sep==input) {

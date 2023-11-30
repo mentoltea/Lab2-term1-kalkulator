@@ -28,19 +28,31 @@ int eval(int arg1, int arg2, char operation) {
 
     
     case '&':
+        if (arg1<0 || arg2<0) {
+            return NULL;
+        }
         return arg1 & arg2;
 
 
     case '|':
+        if (arg1<0 || arg2<0) {
+            return NULL;
+        }
         return arg1 | arg2;
 
     
     case '^':
+        if (arg1<0 || arg2<0) {
+            return NULL;
+        }
         return arg1 ^ arg2;
 
     
     case '~':
-        return ~arg1;
+        if (arg1<0) {
+            return NULL;
+        }
+        return -(~arg1);
         break;
     
 

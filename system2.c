@@ -1,6 +1,9 @@
 #include "system2.h"
 
 int from2to10(char* arg) {
+    if (arg == NULL) {
+        return NULL;
+    }
     printf("%s ->", arg);
     while (*arg==' ') {
         arg += 1;
@@ -40,6 +43,11 @@ int from2to10(char* arg) {
 }
 
 char* from10to2(int decimal) {
+    if (decimal==0) {
+        char *result = (char*)malloc(1*sizeof(char));
+        result[0]='0';
+        return result;
+    }
     int koef = 0;
     if (decimal<0) {koef=1; decimal*=-1;}
     char* alphabet = "01";
